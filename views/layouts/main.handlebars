@@ -1,10 +1,43 @@
 <!doctype html>
 <html>
+
 <head>
 <title>Medical Information System</title>
+
+{{#if showTests}}
+<link href="stylesheets" src="/vendor/mocha.css">
+{{/if}}
+
+<script src="//code.jquery.com/jquery-2.0.2.min.js"></script>
 </head>
+
 <body>
-<h1> <img src="/image/default_pic.jpg" alt="logo" style="width:40px"> </h1>
-{{{body}}}
+<h1>Medical Information System <img src="/image/default_pic.jpg" alt="logo" style="width:40px"> </h1>
+
+{{#if}}
+<div id="mocha">
+<script src="/vendor/mocha.js"></script>
+<script src="/vendor/chai.js"></script>
+<script>
+mocha.ui('tdd');
+var assert = chai.assert;
+</script>
+</div>
+
+<script src='/qa/test-global.js' ></script>
+<script>
+
+{{#if pageTestScript}}
+
+<script src="{{pageTestScript}}"></script>
+
+{{/if}}
+
+<script>mocha.run();</script>
+
+{{/if}}
+
+</script>
 </body>
+
 </html>

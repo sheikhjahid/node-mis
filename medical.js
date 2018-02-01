@@ -7,7 +7,14 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));	
 
 var information = require('./lib/information.js');
-var aboutinfo = require('./lib/about.js');					
+var aboutinfo = require('./lib/about.js');	
+
+app.use(function(req, res, next)
+{
+   res.locals.showTests = app.get('env')!=='production' && req.query.test==='1';
+   next();
+});
+
 app.get('', function(req, res)
 {
 	var randominfo = information[Math.floor(Math.random()*information.length)];
