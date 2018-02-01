@@ -6,17 +6,17 @@ app.set('view engine','handlebars');
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));	
 
-var information =[ "This is the unofficial website of Medical Information System.",
-					"Construction is still on the process",
-					"Official Website is coming soon shortly",];
+var information = require('./lib/information.js');
+var aboutinfo = require('./lib/about.js');					
 app.get('', function(req, res)
 {
 	var randominfo = information[Math.floor(Math.random()*information.length)];
-	res.render('home',{ information: randominfo });
+	res.render('home',{ information: information.getInformation() });
 });
 app.get('/about', function(req, res)
 {
-	res.render('about');
+	var randomabout = aboutinfo[Math.floor(Math.random()*aboutinfo.length)];
+	res.render('about',{ aboutinfo: aboutinfo.getAbout() });
 });
 app.use(function(req, res, next)
 {
